@@ -66,13 +66,13 @@ func Z(bit ...int) matrix.Matrix {
 	return matrix.TensorProductN(m, bit...)
 }
 
-// func H(bit ...int) matrix.Matrix {
-// 	m := make(matrix.Matrix, 2)
-// 	v := complex(1/math.Sqrt2, 0)
-// 	m[0] = []complex128{v, v}
-// 	m[1] = []complex128{v, -1 * v}
-// 	return matrix.TensorProductN(m, bit...)
-// }
+func H(bit ...int) matrix.Matrix {
+	m := make(matrix.Matrix, 2)
+	v := complex(1/math.Sqrt2, 0)
+	m[0] = []complex128{v, v}
+	m[1] = []complex128{v, -1 * v}
+	return matrix.TensorProductN(m, bit...)
+}
 
 // func S(bit ...int) matrix.Matrix {
 // 	m := make(matrix.Matrix, 2)
