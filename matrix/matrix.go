@@ -172,20 +172,25 @@ func (m Matrix) Apply(input Matrix) (applied Matrix) {
 	return
 }
 
-// func (m0 Matrix) Mul(z complex128) Matrix {
-// 	p, q := m0.Dimension()
-
-// 	m := Matrix{}
-// 	for i := 0; i < p; i++ {
-// 		v := []complex128{}
-// 		for j := 0; j < q; j++ {
-// 			v = append(v, z*m0[i][j])
-// 		}
-// 		m = append(m, v)
-// 	}
-
-// 	return m
-// }
+// Multiply : Returns current matrix with each component multiplied by the input
+func (m Matrix) Multiply(input complex128) (multiMatrix Matrix) {
+	// get the number of rows and columns
+	rows, columns := m.Dimension()
+	// for all rows in the matrix
+	for i := 0; i < rows; i++ {
+		// create the new vector/row
+		vector := []complex128{}
+		// for each column in the current row
+		for j := 0; j < columns; j++ {
+			// append the product to the new vector
+			vector = append(vector, input*m[i][j])
+		}
+		// append the vector/row to the matrix
+		multiMatrix = append(multiMatrix, vector)
+	}
+	// return the "product" matrix
+	return
+}
 
 // func (m0 Matrix) Add(m1 Matrix) Matrix {
 // 	p, q := m0.Dimension()
