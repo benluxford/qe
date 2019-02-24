@@ -81,13 +81,13 @@ func S(bit ...int) matrix.Matrix {
 	return matrix.TensorProductN(m, bit...)
 }
 
-// func T(bit ...int) matrix.Matrix {
-// 	m := make(matrix.Matrix, 2)
-// 	v := cmplx.Exp(complex(0, 1) * math.Pi / 4)
-// 	m[0] = []complex128{1, 0}
-// 	m[1] = []complex128{0, v}
-// 	return matrix.TensorProductN(m, bit...)
-// }
+func T(bit ...int) matrix.Matrix {
+	m := make(matrix.Matrix, 2)
+	v := cmplx.Exp(complex(0, 1) * math.Pi / 4)
+	m[0] = []complex128{1, 0}
+	m[1] = []complex128{0, v}
+	return matrix.TensorProductN(m, bit...)
+}
 
 // func ControlledR(bit int, c []int, t, k int) matrix.Matrix {
 // 	m := I([]int{bit}...)
