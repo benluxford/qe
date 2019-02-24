@@ -1,6 +1,10 @@
 package vector
 
-import "math/cmplx"
+import (
+	"math/cmplx"
+
+	"github.com/benluxford/qe/matrix"
+)
 
 // Vector : The vector of a Qubit
 type Vector []complex128
@@ -155,34 +159,42 @@ func TensorProduct(input ...Vector) (product Vector) {
 	return
 }
 
-//////////////
+// Apply : Return vector multiplied by matrix
+func (v Vector) Apply(input matrix.Matrix) (appliedVector Vector) {
+	// get the number of rows and columns
+	mRows, _ := input.Dimension()
+	// for all of the rows in the matrix
+	for i := 0; i < mRows; i++ {
+		// tmp := complex(0, 0)
+		var component complex128
+		// for all components in vector
+		for j := 0; j < len(v); j++ {
+			// add the product of the input by the vector
+			component += input[i][j] * v[j]
+		}
+		// add the component to the vector
+		appliedVector = append(appliedVector, component)
+	}
+	// return the applied vector
+	return
+}
 
-// func (v0 Vector) Apply(mat matrix.Matrix) Vector {
-// 	v := Vector{}
-
-// 	m, _ := mat.Dimension()
-// 	for i := 0; i < m; i++ {
-// 		tmp := complex(0, 0)
-// 		for j := 0; j < len(v0); j++ {
-// 			tmp = tmp + mat[i][j]*v0[j]
-// 		}
-// 		v = append(v, tmp)
-// 	}
-
-// 	return v
-// }
-
-// func (v0 Vector) Equals(v1 Vector, eps ...float64) bool {
-// 	if len(v0) != len(v1) {
-// 		return false
-// 	}
-
-// 	e := matrix.Eps(eps...)
-// 	for i := 0; i < len(v0); i++ {
-// 		if cmplx.Abs(v0[i]-v1[i]) > e {
-// 			return false
-// 		}
-
-// 	}
-// 	return true
-// }
+// Equals : Return if all components of current vector and input vector == 0 or are > e
+func (v Vector) Equals(input Vector, eps ...float64) (equals bool) {
+	// if the vectors are of diff length, return false
+	if len(v) != len(input) {
+		return
+	}
+	// Get the boundary number (probably 0.0)
+	e := matrix.Eps(eps...)
+	// for each component
+	for i := 0; i < len(v); i++ {
+		// check that current vector component - input component == 0.0 or is greater than e
+		if cmplx.Abs(v[i]-input[i]) > e {
+			return
+		}
+	}
+	// nothing was triggered, the vectors are the same :)
+	equals = true
+	return true
+}
