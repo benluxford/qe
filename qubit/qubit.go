@@ -38,6 +38,7 @@ func One(bit ...int) *Qubit {
 	return &Qubit{v.TensorProductN(v.Vector{0, 1}, bit...)}
 }
 
+// NumberOfBit : Returns the number of bits in vector
 func (q *Qubit) NumberOfBit() int {
 	dim := float64(q.v.Dimension())
 	log := math.Log2(dim)
