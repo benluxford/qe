@@ -283,18 +283,19 @@ func (m Matrix) TensorProduct(input Matrix) (product Matrix) {
 	return
 }
 
-// func TensorProductN(m Matrix, bit ...int) Matrix {
-// 	if len(bit) < 1 {
-// 		return m
-// 	}
-
-// 	m0 := m
-// 	for i := 1; i < bit[0]; i++ {
-// 		m0 = m0.TensorProduct(m)
-// 	}
-
-// 	return m0
-// }
+// TensorProductN : Returns the tensor product of a given matrix n times
+func TensorProductN(input Matrix, bit ...int) (product Matrix) {
+	product = input
+	// if n == 0 return the product of matrix * 0 = input matrix
+	if len(bit) < 1 {
+		return
+	}
+	// for the number of iterations, compound the product of the matrix
+	for i := 1; i < bit[0]; i++ {
+		product = product.TensorProduct(input)
+	}
+	return
+}
 
 // func TensorProduct(m ...Matrix) Matrix {
 // 	m0 := m[0]
