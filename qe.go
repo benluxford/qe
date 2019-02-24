@@ -3,14 +3,19 @@ package main
 import (
 	"fmt"
 
+	"github.com/benluxford/qe/matrix"
 	"github.com/benluxford/qe/vector"
 )
-
-type Vector []complex128
 
 func main() {
 	v := vector.New(1, 2, 3, 4, 5)
 	fmt.Println(v)
 	c := vector.TensorProduct(v, v)
 	fmt.Println(c)
+	m := matrix.Matrix{{1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}}
+	fmt.Println(m)
+	t := m.Transpose()
+	fmt.Println(t)
+	fmt.Println(m.Equals(m))
+	// fmt.Println(matrix.Eps(22.5, 15.2))
 }
