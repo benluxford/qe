@@ -175,31 +175,31 @@ func CNOT(bit, c, t int) matrix.Matrix {
 	return ControlledNot(bit, []int{c}, t)
 }
 
-// func ControlledZ(bit int, c []int, t int) matrix.Matrix {
-// 	m := I([]int{bit}...)
-// 	dim := len(m)
+func ControlledZ(bit int, c []int, t int) matrix.Matrix {
+	m := I([]int{bit}...)
+	dim := len(m)
 
-// 	f := "%0" + strconv.Itoa(bit) + "s"
-// 	for i := 0; i < dim; i++ {
-// 		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
-// 		bits := []rune(s)
+	f := "%0" + strconv.Itoa(bit) + "s"
+	for i := 0; i < dim; i++ {
+		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
+		bits := []rune(s)
 
-// 		// Apply Z
-// 		apply := true
-// 		for i := range c {
-// 			if bits[c[i]] == '0' {
-// 				apply = false
-// 				break
-// 			}
-// 		}
+		// Apply Z
+		apply := true
+		for i := range c {
+			if bits[c[i]] == '0' {
+				apply = false
+				break
+			}
+		}
 
-// 		if apply && bits[t] == '1' {
-// 			m[i][i] = complex(-1, 0) * m[i][i]
-// 		}
-// 	}
+		if apply && bits[t] == '1' {
+			m[i][i] = complex(-1, 0) * m[i][i]
+		}
+	}
 
-// 	return m
-// }
+	return m
+}
 
 // func CZ(bit, c, t int) matrix.Matrix {
 // 	return ControlledZ(bit, []int{c}, t)
