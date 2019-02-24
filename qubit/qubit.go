@@ -86,13 +86,13 @@ func New(input ...complex128) (qubit *Qubit) {
 // 	return q
 // }
 
-func (q *Qubit) Normalize() *Qubit {
+func (q *Qubit) Normalize() (qubit *Qubit) {
 	var sum float64
-	for _, amp := range q.v {
-		sum = sum + math.Pow(cmplx.Abs(amp), 2)
+	for _, component := range q.v {
+		sum += math.Pow(cmplx.Abs(component), 2)
 	}
 	z := 1 / math.Sqrt(sum)
-	q.v = q.v.Multi(complex(z, 0))
+	q.v = q.v.Multiply(complex(z, 0))
 	return q
 }
 
