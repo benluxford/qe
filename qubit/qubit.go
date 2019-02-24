@@ -45,9 +45,10 @@ func (q *Qubit) NumberOfBit() int {
 	return int(log)
 }
 
-// func (q *Qubit) IsZero(eps ...float64) bool {
-// 	return q.Equals(Zero(), eps...)
-// }
+// IsZero : REturns truw if Qubit is in zero state
+func (q *Qubit) IsZero(eps ...float64) bool {
+	return q.Equals(Zero(), eps...)
+}
 
 // func (q *Qubit) IsOne(eps ...float64) bool {
 // 	return q.Equals(One(), eps...)
@@ -81,9 +82,10 @@ func (q *Qubit) NumberOfBit() int {
 // 	return sum / 2
 // }
 
-// func (q *Qubit) Equals(q0 *Qubit, eps ...float64) bool {
-// 	return q.v.Equals(q0.v, eps...)
-// }
+// Equals : Returns true if the given vectors equal each other
+func (q *Qubit) Equals(input *Qubit, eps ...float64) bool {
+	return q.v.Equals(input.v, eps...)
+}
 
 // func (q *Qubit) TensorProduct(q0 *Qubit) *Qubit {
 // 	q.v = q.v.TensorProduct(q0.v)
