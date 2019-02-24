@@ -15,14 +15,18 @@ func Max(input []float64) (max float64) {
 	return
 }
 
-// func Min(p []float64) float64 {
-// 	min := p[0]
-// 	for _, pp := range p {
-// 		min = math.Max(min, pp)
-// 	}
-
-// 	return min
-// }
+// Min : Return the min probability
+func Min(input []float64) (min float64) {
+	// set min to the first value
+	min = input[0]
+	// for all numbers in input slice
+	for _, number := range input {
+		// return the max of the two numbers and set max to highest
+		min = math.Min(min, number)
+	}
+	// return the lowest number
+	return min
+}
 
 // func Sum(p []float64) float64 {
 // 	var sum float64
