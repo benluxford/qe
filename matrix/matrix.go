@@ -172,6 +172,45 @@ func (m Matrix) Apply(input Matrix) (applied Matrix) {
 	return
 }
 
+// TensorProduct : Returns the tensor product of the current and input matrix
+func (m Matrix) TensorProduct(input Matrix) (product Matrix) {
+	// get the number of rows and columns
+	mRows, mColumns := m.Dimension()
+	inputRows, inputColumns := input.Dimension()
+	// create the temp slice of matrix
+	tmp := []Matrix{}
+	// for row in current matrix
+	for i := 0; i < mRows; i++ {
+		// for all columns in the current row
+		for j := 0; j < mColumns; j++ {
+			// multiply the input matrix by the current matrix component
+			// append multiplied matrix to tem slice
+			tmp = append(tmp, input.Multiply(m[i][j]))
+		}
+	}
+
+	// for matrix in tmp matrix slice
+	for l := 0; l < len(tmp); l = l + mRows {
+		// for rows in each matrix
+		for j := 0; j < inputRows; j++ {
+			// create the new vector
+			vector := []complex128{}
+			// for each row in current matrix
+			for i := l; i < l+mRows; i++ {
+				// for each component in row
+				for k := 0; k < inputColumns; k++ {
+					// append the value from temp > matrix > row > component
+					vector = append(vector, tmp[i][j][k])
+				}
+			}
+			// append the vector to the product matrix
+			product = append(product, vector)
+		}
+	}
+	// return the TensorProduct of the two matrix
+	return
+}
+
 // Multiply : Returns current matrix with each component multiplied by the input
 func (m Matrix) Multiply(input complex128) (multiMatrix Matrix) {
 	// get the number of rows and columns
@@ -241,45 +280,6 @@ func (m Matrix) Trace() (sum complex128) {
 		sum += m[i][i]
 	}
 	// return the sum of the traced numbers
-	return
-}
-
-// TensorProduct : Returns the tensor product of the current and input matrix
-func (m Matrix) TensorProduct(input Matrix) (product Matrix) {
-	// get the number of rows and columns
-	mRows, mColumns := m.Dimension()
-	inputRows, inputColumns := input.Dimension()
-	// create the temp slice of matrix
-	tmp := []Matrix{}
-	// for row in current matrix
-	for i := 0; i < mRows; i++ {
-		// for all columns in the current row
-		for j := 0; j < mColumns; j++ {
-			// multiply the input matrix by the current matrix component
-			// append multiplied matrix to tem slice
-			tmp = append(tmp, input.Multiply(m[i][j]))
-		}
-	}
-
-	// for matrix in tmp matrix slice
-	for l := 0; l < len(tmp); l = l + mRows {
-		// for rows in each matrix
-		for j := 0; j < inputRows; j++ {
-			// create the new vector
-			vector := []complex128{}
-			// for each row in current matrix
-			for i := l; i < l+mRows; i++ {
-				// for each component in row
-				for k := 0; k < inputColumns; k++ {
-					// append the value from temp > matrix > row > component
-					vector = append(vector, tmp[i][j][k])
-				}
-			}
-			// append the vector to the product matrix
-			product = append(product, vector)
-		}
-	}
-	// return the TensorProduct of the two matrix
 	return
 }
 
