@@ -6,17 +6,20 @@ import "math/cmplx"
 type Matrix [][]complex128
 
 // Dimension : returns the overall dims of the matrix, height and width
-func (m Matrix) Dimension() (height, width int) {
+// TODO : save the rows and columns as a value in the Matrix, will enable the removal
+// of all row and column counts in other functions
+func (m Matrix) Dimension() (rows, columns int) {
 	// total number of rows in matrix
-	height = len(m)
+	rows = len(m)
 	// total number of columns in matrix
-	width = len(m[0])
+	columns = len(m[0])
 	return
 }
 
 // Transpose : Returns matrix with all 1'st column values within the first row and etc
 // e.g. Matrix{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}} => Matrix{{1, 1, 1}, {2, 2, 2}, {3, 3, 3}}
 func (m Matrix) Transpose() (swapped Matrix) {
+	// count the number of rows and columns in cuttent matrix
 	rows, columns := m.Dimension()
 	// for all of the rows
 	for i := 0; i < rows; i++ {
