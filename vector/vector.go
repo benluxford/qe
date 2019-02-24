@@ -154,3 +154,35 @@ func TensorProduct(input ...Vector) (product Vector) {
 	}
 	return
 }
+
+//////////////
+
+// func (v0 Vector) Apply(mat matrix.Matrix) Vector {
+// 	v := Vector{}
+
+// 	m, _ := mat.Dimension()
+// 	for i := 0; i < m; i++ {
+// 		tmp := complex(0, 0)
+// 		for j := 0; j < len(v0); j++ {
+// 			tmp = tmp + mat[i][j]*v0[j]
+// 		}
+// 		v = append(v, tmp)
+// 	}
+
+// 	return v
+// }
+
+// func (v0 Vector) Equals(v1 Vector, eps ...float64) bool {
+// 	if len(v0) != len(v1) {
+// 		return false
+// 	}
+
+// 	e := matrix.Eps(eps...)
+// 	for i := 0; i < len(v0); i++ {
+// 		if cmplx.Abs(v0[i]-v1[i]) > e {
+// 			return false
+// 		}
+
+// 	}
+// 	return true
+// }
