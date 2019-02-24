@@ -201,35 +201,35 @@ func ControlledZ(bit int, c []int, t int) matrix.Matrix {
 	return m
 }
 
-// func CZ(bit, c, t int) matrix.Matrix {
-// 	return ControlledZ(bit, []int{c}, t)
-// }
+func CZ(bit, c, t int) matrix.Matrix {
+	return ControlledZ(bit, []int{c}, t)
+}
 
-// func ControlledS(bit int, c []int, t int) matrix.Matrix {
-// 	m := I([]int{bit}...)
-// 	dim := len(m)
+func ControlledS(bit int, c []int, t int) matrix.Matrix {
+	m := I([]int{bit}...)
+	dim := len(m)
 
-// 	f := "%0" + strconv.Itoa(bit) + "s"
-// 	for i := 0; i < dim; i++ {
-// 		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
-// 		bits := []rune(s)
+	f := "%0" + strconv.Itoa(bit) + "s"
+	for i := 0; i < dim; i++ {
+		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
+		bits := []rune(s)
 
-// 		// Apply S
-// 		apply := true
-// 		for i := range c {
-// 			if bits[c[i]] == '0' {
-// 				apply = false
-// 				break
-// 			}
-// 		}
+		// Apply S
+		apply := true
+		for i := range c {
+			if bits[c[i]] == '0' {
+				apply = false
+				break
+			}
+		}
 
-// 		if apply && bits[t] == '1' {
-// 			m[i][i] = 1i * m[i][i]
-// 		}
-// 	}
+		if apply && bits[t] == '1' {
+			m[i][i] = 1i * m[i][i]
+		}
+	}
 
-// 	return m
-// }
+	return m
+}
 
 // func CS(bit, c, t int) matrix.Matrix {
 // 	return ControlledS(bit, []int{c}, t)
