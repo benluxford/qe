@@ -231,9 +231,9 @@ func ControlledS(bit int, c []int, t int) matrix.Matrix {
 	return m
 }
 
-// func CS(bit, c, t int) matrix.Matrix {
-// 	return ControlledS(bit, []int{c}, t)
-// }
+func CS(bit, c, t int) matrix.Matrix {
+	return ControlledS(bit, []int{c}, t)
+}
 
 // func Swap(bit, c, t int) matrix.Matrix {
 // 	g0 := CNOT(bit, c, t)
