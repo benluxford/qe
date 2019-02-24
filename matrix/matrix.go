@@ -297,14 +297,16 @@ func TensorProductN(input Matrix, bit ...int) (product Matrix) {
 	return
 }
 
-// func TensorProduct(m ...Matrix) Matrix {
-// 	m0 := m[0]
-// 	for i := 1; i < len(m); i++ {
-// 		m0 = m0.TensorProduct(m[i])
-// 	}
-
-// 	return m0
-// }
+// TensorProduct : Returns the tensor product of a given matrix
+func TensorProduct(input ...Matrix) (product Matrix) {
+	// set the product to be the first matrix
+	product = input[0]
+	// for all matrix > 1 calculate the tensor product, else return the first matrix
+	for i := 1; i < len(input); i++ {
+		product = product.TensorProduct(input[i])
+	}
+	return
+}
 
 // Eps : A very strange little function that returns the first float or 0.0
 func Eps(eps ...float64) (value float64) {
