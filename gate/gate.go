@@ -1,8 +1,10 @@
 package gate
 
 import (
+	"fmt"
 	"math"
 	"math/cmplx"
+	"strconv"
 
 	"github.com/benluxford/qe/matrix"
 )
@@ -89,34 +91,34 @@ func T(bit ...int) matrix.Matrix {
 	return matrix.TensorProductN(m, bit...)
 }
 
-// func ControlledR(bit int, c []int, t, k int) matrix.Matrix {
-// 	m := I([]int{bit}...)
-// 	dim := len(m)
+func ControlledR(bit int, c []int, t, k int) matrix.Matrix {
+	m := I([]int{bit}...)
+	dim := len(m)
 
-// 	p := 2 * math.Pi / math.Pow(2, float64(k))
-// 	e := cmplx.Exp(complex(0, p))
+	p := 2 * math.Pi / math.Pow(2, float64(k))
+	e := cmplx.Exp(complex(0, p))
 
-// 	f := "%0" + strconv.Itoa(bit) + "s"
-// 	for i := 0; i < dim; i++ {
-// 		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
-// 		bits := []rune(s)
+	f := "%0" + strconv.Itoa(bit) + "s"
+	for i := 0; i < dim; i++ {
+		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
+		bits := []rune(s)
 
-// 		// Apply R(k)
-// 		apply := true
-// 		for i := range c {
-// 			if bits[c[i]] == '0' {
-// 				apply = false
-// 				break
-// 			}
-// 		}
+		// Apply R(k)
+		apply := true
+		for i := range c {
+			if bits[c[i]] == '0' {
+				apply = false
+				break
+			}
+		}
 
-// 		if apply && bits[t] == '1' {
-// 			m[i][i] = e * m[i][i]
-// 		}
-// 	}
+		if apply && bits[t] == '1' {
+			m[i][i] = e * m[i][i]
+		}
+	}
 
-// 	return m
-// }
+	return m
+}
 
 // func CR(bit, c, t, k int) matrix.Matrix {
 // 	return ControlledR(bit, []int{c}, t, k)
