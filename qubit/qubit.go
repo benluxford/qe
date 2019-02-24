@@ -14,11 +14,17 @@ type Qubit struct {
 
 // New : Takes vector components as input, returns pointer to new Qubit
 func New(input ...complex128) (qubit *Qubit) {
+	// create the new vector
 	vector := v.Vector{}
+	// add each component to the vector
 	for _, component := range input {
 		vector = append(vector, component)
 	}
-	qubit.Normalize()
+	// create the Qubit
+	qubit = &Qubit{vector}
+	// Normalise the vector values
+	qubit.Normalise()
+	// return the pointer to the new Qubit
 	return
 }
 
@@ -86,14 +92,19 @@ func New(input ...complex128) (qubit *Qubit) {
 // 	return q
 // }
 
-func (q *Qubit) Normalize() (qubit *Qubit) {
+// Normalise : Returns the current pointer to Qubit with normalised vector
+func (q *Qubit) Normalise() (qubit *Qubit) {
+	// set qubit to be the same address as q
+	qubit = q
+	//. the sum of all vector components
 	var sum float64
+	// add the base to the exponent power to sum
 	for _, component := range q.v {
 		sum += math.Pow(cmplx.Abs(component), 2)
 	}
 	z := 1 / math.Sqrt(sum)
 	q.v = q.v.Multiply(complex(z, 0))
-	return q
+	return
 }
 
 // func (q *Qubit) Amplitude() []complex128 {
