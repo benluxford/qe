@@ -255,30 +255,30 @@ func Fredkin() matrix.Matrix {
 	return m
 }
 
-// func QFT(bit int) matrix.Matrix {
-// 	m := I(bit)
+func QFT(bit int) matrix.Matrix {
+	m := I(bit)
 
-// 	for i := 0; i < bit; i++ {
-// 		h := []matrix.Matrix{}
-// 		for j := 0; j < bit; j++ {
-// 			if i == j {
-// 				h = append(h, H())
-// 			} else {
-// 				h = append(h, I())
-// 			}
-// 		}
-// 		m = m.Apply(matrix.TensorProduct(h...))
+	for i := 0; i < bit; i++ {
+		h := []matrix.Matrix{}
+		for j := 0; j < bit; j++ {
+			if i == j {
+				h = append(h, H())
+			} else {
+				h = append(h, I())
+			}
+		}
+		m = m.Apply(matrix.TensorProduct(h...))
 
-// 		k := 2
-// 		for j := i + 1; j < bit; j++ {
-// 			m = m.Apply(CR(bit, j, i, k))
-// 			k++
-// 		}
-// 	}
+		k := 2
+		for j := i + 1; j < bit; j++ {
+			m = m.Apply(CR(bit, j, i, k))
+			k++
+		}
+	}
 
-// 	for i := 0; i < bit/2; i++ {
-// 		m = m.Apply(Swap(bit, i, bit-1-i))
-// 	}
+	for i := 0; i < bit/2; i++ {
+		m = m.Apply(Swap(bit, i, bit-1-i))
+	}
 
-// 	return m
-// }
+	return m
+}
