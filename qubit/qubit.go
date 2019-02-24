@@ -33,7 +33,7 @@ func Zero(input ...int) *Qubit {
 	return &Qubit{v.TensorProductN(v.Vector{1, 0}, input...)}
 }
 
-// Zero : Returns a new Qubit in one state
+// One : Returns a new Qubit in one state
 func One(bit ...int) *Qubit {
 	return &Qubit{v.TensorProductN(v.Vector{0, 1}, bit...)}
 }
@@ -45,14 +45,15 @@ func (q *Qubit) NumberOfBit() int {
 	return int(log)
 }
 
-// IsZero : REturns truw if Qubit is in zero state
+// IsZero : Returns true if Qubit is in zero state
 func (q *Qubit) IsZero(eps ...float64) bool {
 	return q.Equals(Zero(), eps...)
 }
 
-// func (q *Qubit) IsOne(eps ...float64) bool {
-// 	return q.Equals(One(), eps...)
-// }
+// IsOne : Returns true if Qubit is in one state
+func (q *Qubit) IsOne(eps ...float64) bool {
+	return q.Equals(One(), eps...)
+}
 
 // func (q *Qubit) Clone() *Qubit {
 // 	return &Qubit{q.v.Clone()}
