@@ -235,12 +235,12 @@ func CS(bit, c, t int) matrix.Matrix {
 	return ControlledS(bit, []int{c}, t)
 }
 
-// func Swap(bit, c, t int) matrix.Matrix {
-// 	g0 := CNOT(bit, c, t)
-// 	g1 := CNOT(bit, t, c)
-// 	g2 := CNOT(bit, c, t)
-// 	return g0.Apply(g1).Apply(g2)
-// }
+func Swap(bit, c, t int) matrix.Matrix {
+	g0 := CNOT(bit, c, t)
+	g1 := CNOT(bit, t, c)
+	g2 := CNOT(bit, c, t)
+	return g0.Apply(g1).Apply(g2)
+}
 
 // func Fredkin() matrix.Matrix {
 // 	m := make(matrix.Matrix, 8)
