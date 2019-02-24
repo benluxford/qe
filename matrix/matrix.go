@@ -192,20 +192,25 @@ func (m Matrix) Multiply(input complex128) (multiMatrix Matrix) {
 	return
 }
 
-// func (m0 Matrix) Add(m1 Matrix) Matrix {
-// 	p, q := m0.Dimension()
-
-// 	m := Matrix{}
-// 	for i := 0; i < p; i++ {
-// 		v := []complex128{}
-// 		for j := 0; j < q; j++ {
-// 			v = append(v, m0[i][j]+m1[i][j])
-// 		}
-// 		m = append(m, v)
-// 	}
-
-// 	return m
-// }
+// Add : Returns the current matrix with the sum of all input matrix's components applied
+func (m Matrix) Add(input Matrix) (sumMatrix Matrix) {
+	// get the number of rows and columns
+	rows, columns := m.Dimension()
+	// for all the rows
+	for i := 0; i < rows; i++ {
+		// create the new vector
+		vector := []complex128{}
+		// for each column in the current row
+		for j := 0; j < columns; j++ {
+			// append the sum of the two corresponding components from current and input matrix
+			vector = append(vector, m[i][j]+input[i][j])
+		}
+		// append the vector to the "sum" matrix
+		sumMatrix = append(sumMatrix, vector)
+	}
+	// return the sum matrix
+	return
+}
 
 // func (m0 Matrix) Sub(m1 Matrix) Matrix {
 // 	p, q := m0.Dimension()
