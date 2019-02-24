@@ -64,6 +64,7 @@ func (m Matrix) Equals(input Matrix, eps ...float64) (match bool) {
 
 // Conjugate : Returns the conjugate of the current matrix
 func (m Matrix) Conjugate() (mConj Matrix) {
+	// get the number of rows and columns
 	rows, columns := m.Dimension()
 	// for all of the rows
 	for i := 0; i < rows; i++ {
