@@ -90,21 +90,28 @@ func (m Matrix) Dagger() (transposeConjugate Matrix) {
 	return
 }
 
-// func (m0 Matrix) IsHermite(eps ...float64) bool {
-// 	p, q := m0.Dimension()
-// 	m := m0.Dagger()
-// 	e := Eps(eps...)
-
-// 	for i := 0; i < p; i++ {
-// 		for j := 0; j < q; j++ {
-// 			if cmplx.Abs(m0[i][j]-m[i][j]) > e {
-// 				return false
-// 			}
-// 		}
-// 	}
-
-// 	return true
-// }
+// IsHermite : Returns if the number is Hermite polynomial
+func (m Matrix) IsHermite(eps ...float64) (hermite bool) {
+	// get the number of rows and columns
+	rows, columns := m.Dimension()
+	// dagger the matrix
+	dagger := m.Dagger()
+	// If present, return the first eps value (dont know why this has been done, will have to check)
+	e := Eps(eps...)
+	// for all of the rows
+	for i := 0; i < rows; i++ {
+		// for each column in the current row
+		for j := 0; j < columns; j++ {
+			// if the sum of the matrix and daggered matrix is not 0.0 or lower than e > return
+			if cmplx.Abs(m[i][j]-dagger[i][j]) > e {
+				return
+			}
+		}
+	}
+	// If not triggered, map is Hermite polynormal
+	hermite = true
+	return
+}
 
 // func (m0 Matrix) IsUnitary(eps ...float64) bool {
 // 	p, q := m0.Dimension()
