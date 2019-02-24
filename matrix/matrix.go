@@ -18,11 +18,16 @@ func (m Matrix) Dimension() (height, width int) {
 // e.g. Matrix{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}} => Matrix{{1, 1, 1}, {2, 2, 2}, {3, 3, 3}}
 func (m Matrix) Transpose() (swapped Matrix) {
 	rows, columns := m.Dimension()
+	// for all of the rows
 	for i := 0; i < rows; i++ {
+		// create a temp row
 		v := []complex128{}
+		// for each column in the current row
 		for j := 0; j < columns; j++ {
+			// append values to the temp row
 			v = append(v, m[j][i])
 		}
+		// add temp row to the swapped map
 		swapped = append(swapped, v)
 	}
 	return
@@ -57,20 +62,23 @@ func (m Matrix) Equals(input Matrix, eps ...float64) (match bool) {
 	return
 }
 
-// func (m0 Matrix) Conjugate() Matrix {
-// 	p, q := m0.Dimension()
-
-// 	m2 := Matrix{}
-// 	for i := 0; i < p; i++ {
-// 		v := []complex128{}
-// 		for j := 0; j < q; j++ {
-// 			v = append(v, cmplx.Conj(m0[i][j]))
-// 		}
-// 		m2 = append(m2, v)
-// 	}
-
-// 	return m2
-// }
+// Conjugate : Returns the conjugate of the current matrix
+func (m Matrix) Conjugate() (mConj Matrix) {
+	rows, columns := m.Dimension()
+	// for all of the rows
+	for i := 0; i < rows; i++ {
+		// create a temp row
+		v := []complex128{}
+		// for each column in the current row
+		for j := 0; j < columns; j++ {
+			// append values to the temp row
+			v = append(v, cmplx.Conj(m[i][j]))
+		}
+		// add temp row to the conjugate matrix
+		mConj = append(mConj, v)
+	}
+	return
+}
 
 // func (m0 Matrix) Dagger() Matrix {
 // 	return m0.Transpose().Conjugate()

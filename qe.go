@@ -14,8 +14,7 @@ func main() {
 	fmt.Println(c)
 	m := matrix.Matrix{{1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}}
 	fmt.Println(m)
-	t := m.Transpose()
-	fmt.Println(t)
-	fmt.Println(m.Equals(m))
+	// fmt.Println(m.Transpose())
+	fmt.Println(m.Conjugate())
 	// fmt.Println(matrix.Eps(22.5, 15.2))
 }
