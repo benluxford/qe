@@ -113,13 +113,16 @@ func (m Matrix) IsHermite(eps ...float64) (hermite bool) {
 	return
 }
 
-// func (m0 Matrix) IsUnitary(eps ...float64) bool {
+// IsUnitary : Returns if the matrix is unitary perfect number
+// func (m Matrix) IsUnitary(eps ...float64) bool {
+// 	// get the number of rows and columns
+// 	rows, columns := m.Dimension()
 // 	p, q := m0.Dimension()
 // 	m := m0.Apply(m0.Dagger())
 // 	e := Eps(eps...)
 
-// 	for i := 0; i < p; i++ {
-// 		for j := 0; j < q; j++ {
+// 	for i := 0; i < rows; i++ {
+// 		for j := 0; j < columns; j++ {
 // 			if i == j {
 // 				if cmplx.Abs(m[i][j]-complex(1, 0)) > e {
 // 					return false
@@ -136,25 +139,33 @@ func (m Matrix) IsHermite(eps ...float64) (hermite bool) {
 // 	return true
 // }
 
-// func (m0 Matrix) Apply(m1 Matrix) Matrix {
-// 	m, n := m1.Dimension()
-// 	p, _ := m0.Dimension()
-
-// 	m2 := Matrix{}
-// 	for i := 0; i < m; i++ {
-// 		v := []complex128{}
-// 		for j := 0; j < n; j++ {
-// 			c := complex(0, 0)
-// 			for k := 0; k < p; k++ {
-// 				c = c + m1[i][k]*m0[k][j]
-// 			}
-// 			v = append(v, c)
-// 		}
-// 		m2 = append(m2, v)
-// 	}
-
-// 	return m2
-// }
+// Apply : Return matrix multiplied by another of the same size
+// e.g. Matrix{{1, 2, 3},{1, 2, 3},{1, 2, 3}} => {1*1+2*1+3*1}, {1*2+2*2+3*2}, {1*3+2*3+3*3}....
+func (m Matrix) Apply(input Matrix) (applied Matrix) {
+	// get the number of rows and columns
+	inputRows, inputColumns := input.Dimension()
+	// for all rows
+	for i := 0; i < inputRows; i++ {
+		// create the new vector
+		vector := []complex128{}
+		// for each column in the current row
+		for j := 0; j < inputColumns; j++ {
+			// create the new component
+			var component complex128
+			// matrix multiplication (matrix is the same size, no need to use the row count from m)
+			for k := 0; k < inputRows; k++ {
+				// add the product to component
+				component += input[i][k] * m[k][j]
+			}
+			// append the component to the vector
+			vector = append(vector, component)
+		}
+		// append the vector to the applied matrix
+		applied = append(applied, vector)
+	}
+	// return the applied matrix
+	return
+}
 
 // func (m0 Matrix) Mul(z complex128) Matrix {
 // 	p, q := m0.Dimension()
