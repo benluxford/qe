@@ -244,32 +244,44 @@ func (m Matrix) Trace() (sum complex128) {
 	return
 }
 
-// func (m0 Matrix) TensorProduct(m1 Matrix) Matrix {
-// 	m, n := m0.Dimension()
-// 	p, q := m1.Dimension()
+// TensorProduct : Returns the tensor product of the current and input matrix
+func (m Matrix) TensorProduct(input Matrix) (product Matrix) {
+	// get the number of rows and columns
+	mRows, mColumns := m.Dimension()
+	inputRows, inputColumns := input.Dimension()
+	// create the temp slice of matrix
+	tmp := []Matrix{}
+	// for row in current matrix
+	for i := 0; i < mRows; i++ {
+		// for all columns in the current row
+		for j := 0; j < mColumns; j++ {
+			// multiply the input matrix by the current matrix component
+			// append multiplied matrix to tem slice
+			tmp = append(tmp, input.Multiply(m[i][j]))
+		}
+	}
 
-// 	tmp := []Matrix{}
-// 	for i := 0; i < m; i++ {
-// 		for j := 0; j < n; j++ {
-// 			tmp = append(tmp, m1.Mul(m0[i][j]))
-// 		}
-// 	}
-
-// 	m2 := Matrix{}
-// 	for l := 0; l < len(tmp); l = l + m {
-// 		for j := 0; j < p; j++ {
-// 			v := []complex128{}
-// 			for i := l; i < l+m; i++ {
-// 				for k := 0; k < q; k++ {
-// 					v = append(v, tmp[i][j][k])
-// 				}
-// 			}
-// 			m2 = append(m2, v)
-// 		}
-// 	}
-
-// 	return m2
-// }
+	// for matrix in tmp matrix slice
+	for l := 0; l < len(tmp); l = l + mRows {
+		// for rows in each matrix
+		for j := 0; j < inputRows; j++ {
+			// create the new vector
+			vector := []complex128{}
+			// for each row in current matrix
+			for i := l; i < l+mRows; i++ {
+				// for each component in row
+				for k := 0; k < inputColumns; k++ {
+					// append the value from temp > matrix > row > component
+					vector = append(vector, tmp[i][j][k])
+				}
+			}
+			// append the vector to the product matrix
+			product = append(product, vector)
+		}
+	}
+	// return the TensorProduct of the two matrix
+	return
+}
 
 // func TensorProductN(m Matrix, bit ...int) Matrix {
 // 	if len(bit) < 1 {
