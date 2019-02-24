@@ -232,14 +232,17 @@ func (m Matrix) Subtract(input Matrix) (subMatrix Matrix) {
 	return
 }
 
-// func (m0 Matrix) Trace() complex128 {
-// 	p, _ := m0.Dimension()
-// 	var sum complex128
-// 	for i := 0; i < p; i++ {
-// 		sum = sum + m0[i][i]
-// 	}
-// 	return sum
-// }
+// Trace : Returns the sum of diagonal across the matrix left to right - top to bottom
+func (m Matrix) Trace() (sum complex128) {
+	// get the number of rows and columns
+	rows, _ := m.Dimension()
+	// var sum complex128
+	for i := 0; i < rows; i++ {
+		sum += m[i][i]
+	}
+	// return the sum of the traced numbers
+	return
+}
 
 // func (m0 Matrix) TensorProduct(m1 Matrix) Matrix {
 // 	m, n := m0.Dimension()
