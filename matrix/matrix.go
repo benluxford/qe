@@ -84,9 +84,11 @@ func (m Matrix) Conjugate() (mConj Matrix) {
 	return
 }
 
-// func (m0 Matrix) Dagger() Matrix {
-// 	return m0.Transpose().Conjugate()
-// }
+// Dagger : returns the matrix after Transpose and Conjugate are applied
+func (m Matrix) Dagger() (transposeConjugate Matrix) {
+	transposeConjugate = m.Transpose().Conjugate()
+	return
+}
 
 // func (m0 Matrix) IsHermite(eps ...float64) bool {
 // 	p, q := m0.Dimension()

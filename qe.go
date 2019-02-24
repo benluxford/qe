@@ -15,6 +15,6 @@ func main() {
 	m := matrix.Matrix{{1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}}
 	fmt.Println(m)
 	// fmt.Println(m.Transpose())
-	fmt.Println(m.Conjugate())
+	fmt.Println(m.Dagger())
 	// fmt.Println(matrix.Eps(22.5, 15.2))
 }
