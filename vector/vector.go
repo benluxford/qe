@@ -179,17 +179,22 @@ func (v Vector) Apply(input matrix.Matrix) (appliedVector Vector) {
 	return
 }
 
-// func (v0 Vector) Equals(v1 Vector, eps ...float64) bool {
-// 	if len(v0) != len(v1) {
-// 		return false
-// 	}
-
-// 	e := matrix.Eps(eps...)
-// 	for i := 0; i < len(v0); i++ {
-// 		if cmplx.Abs(v0[i]-v1[i]) > e {
-// 			return false
-// 		}
-
-// 	}
-// 	return true
-// }
+// Equals : Return if all components of current vector and input vector == 0 or are > e
+func (v Vector) Equals(input Vector, eps ...float64) (equals bool) {
+	// if the vectors are of diff length, return false
+	if len(v) != len(input) {
+		return
+	}
+	// Get the boundary number (probably 0.0)
+	e := matrix.Eps(eps...)
+	// for each component
+	for i := 0; i < len(v); i++ {
+		// check that current vector component - input component == 0.0 or is greater than e
+		if cmplx.Abs(v[i]-input[i]) > e {
+			return
+		}
+	}
+	// nothing was triggered, the vectors are the same :)
+	equals = true
+	return true
+}
