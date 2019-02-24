@@ -159,13 +159,13 @@ func ControlledNot(bit int, c []int, t int) matrix.Matrix {
 		index = append(index, v)
 	}
 
-// 	cnot := make(matrix.Matrix, dim)
-// 	for i, ii := range index {
-// 		cnot[i] = m[ii]
-// 	}
+	cnot := make(matrix.Matrix, dim)
+	for i, ii := range index {
+		cnot[i] = m[ii]
+	}
 
-// 	return cnot
-// }
+	return cnot
+}
 
 // func Toffoli() matrix.Matrix {
 // 	return ControlledNot(3, []int{0, 1}, 2)
