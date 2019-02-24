@@ -114,30 +114,35 @@ func (m Matrix) IsHermite(eps ...float64) (hermite bool) {
 }
 
 // IsUnitary : Returns if the matrix is unitary perfect number
-// func (m Matrix) IsUnitary(eps ...float64) bool {
-// 	// get the number of rows and columns
-// 	rows, columns := m.Dimension()
-// 	p, q := m0.Dimension()
-// 	m := m0.Apply(m0.Dagger())
-// 	e := Eps(eps...)
-
-// 	for i := 0; i < rows; i++ {
-// 		for j := 0; j < columns; j++ {
-// 			if i == j {
-// 				if cmplx.Abs(m[i][j]-complex(1, 0)) > e {
-// 					return false
-// 				}
-// 				continue
-// 			}
-
-// 			if cmplx.Abs(m[i][j]-complex(0, 0)) > e {
-// 				return false
-// 			}
-// 		}
-// 	}
-
-// 	return true
-// }
+func (m Matrix) IsUnitary(eps ...float64) (unitary bool) {
+	// get the number of rows and columns
+	rows, columns := m.Dimension()
+	// get the applied dagger of the matrix
+	appliedDagger := m.Apply(m.Dagger())
+	// If present, return the first eps value (dont know why this has been done, will have to check)
+	e := Eps(eps...)
+	// for all of the rows
+	for i := 0; i < rows; i++ {
+		// for each column in the current row
+		for j := 0; j < columns; j++ {
+			if i == j {
+				// if the modulus of component - 1 > e || > 0.0 if no e => false
+				if cmplx.Abs(appliedDagger[i][j]-complex(1, 0)) > e {
+					return
+				}
+				continue
+			}
+			// if the modulus of component > e || > 0.0 if no e => false
+			// strikes me as strings, this could be changed, why subtract 0 from the applied dagger number?
+			if cmplx.Abs(appliedDagger[i][j]-complex(0, 0)) > e {
+				return
+			}
+		}
+	}
+	// nothing hit, the matrix is unitary
+	unitary = true
+	return
+}
 
 // Apply : Return matrix multiplied by another of the same size
 // e.g. Matrix{{1, 2, 3},{1, 2, 3},{1, 2, 3}} => {1*1+2*1+3*1}, {1*2+2*2+3*2}, {1*3+2*3+3*3}....
