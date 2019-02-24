@@ -28,11 +28,10 @@ func Min(input []float64) (min float64) {
 	return min
 }
 
-// func Sum(p []float64) float64 {
-// 	var sum float64
-// 	for _, pp := range p {
-// 		sum = sum + pp
-// 	}
-
-// 	return sum
-// }
+// Sum : Returns the sum of all components in slice
+func Sum(input []float64) (sum float64) {
+	for _, number := range input {
+		sum += number
+	}
+	return
+}
