@@ -212,20 +212,25 @@ func (m Matrix) Add(input Matrix) (sumMatrix Matrix) {
 	return
 }
 
-// func (m0 Matrix) Sub(m1 Matrix) Matrix {
-// 	p, q := m0.Dimension()
-
-// 	m := Matrix{}
-// 	for i := 0; i < p; i++ {
-// 		v := []complex128{}
-// 		for j := 0; j < q; j++ {
-// 			v = append(v, m0[i][j]-m1[i][j])
-// 		}
-// 		m = append(m, v)
-// 	}
-
-// 	return m
-// }
+// Subtract : subtracts the components of the input matrix from the components of the current matrix
+func (m Matrix) Subtract(input Matrix) (subMatrix Matrix) {
+	// get the number of rows and columns
+	rows, columns := m.Dimension()
+	// for each row
+	for i := 0; i < rows; i++ {
+		// create the new vector
+		vector := []complex128{}
+		// for each column in the current row
+		for j := 0; j < columns; j++ {
+			// append the current matrix component - the input matrix component
+			vector = append(vector, m[i][j]-input[i][j])
+		}
+		// append the vector to the "sub" matrix
+		subMatrix = append(subMatrix, vector)
+	}
+	// return the current matrix, less the value of the components of the input matrix
+	return
+}
 
 // func (m0 Matrix) Trace() complex128 {
 // 	p, _ := m0.Dimension()

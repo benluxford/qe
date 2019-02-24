@@ -14,6 +14,6 @@ func main() {
 	m := matrix.Matrix{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}}
 	fmt.Println(m)
 	// fmt.Println(m.Transpose())
-	fmt.Println(m.Add(m))
+	fmt.Println(m.Subtract(m))
 	// fmt.Println(matrix.Eps(22.5, 15.2))
 }
