@@ -28,19 +28,21 @@ func New(input ...complex128) (qubit *Qubit) {
 	return
 }
 
-// func Zero(bit ...int) *Qubit {
-// 	return &Qubit{v.TensorProductN(v.Vector{1, 0}, bit...)}
-// }
+// Zero : Returns a new Qubit in zero state
+func Zero(input ...int) *Qubit {
+	return &Qubit{v.TensorProductN(v.Vector{1, 0}, input...)}
+}
 
-// func One(bit ...int) *Qubit {
-// 	return &Qubit{v.TensorProductN(v.Vector{0, 1}, bit...)}
-// }
+// Zero : Returns a new Qubit in one state
+func One(bit ...int) *Qubit {
+	return &Qubit{v.TensorProductN(v.Vector{0, 1}, bit...)}
+}
 
-// func (q *Qubit) NumberOfBit() int {
-// 	dim := float64(q.v.Dimension())
-// 	log := math.Log2(dim)
-// 	return int(log)
-// }
+func (q *Qubit) NumberOfBit() int {
+	dim := float64(q.v.Dimension())
+	log := math.Log2(dim)
+	return int(log)
+}
 
 // func (q *Qubit) IsZero(eps ...float64) bool {
 // 	return q.Equals(Zero(), eps...)

@@ -189,3 +189,8 @@ func (v Vector) Equals(input Vector, eps ...float64) (equals bool) {
 	equals = true
 	return true
 }
+
+// Dimension : Returns the length of the vector
+func (v Vector) Dimension() int {
+	return len(v)
+}
