@@ -74,12 +74,12 @@ func H(bit ...int) matrix.Matrix {
 	return matrix.TensorProductN(m, bit...)
 }
 
-// func S(bit ...int) matrix.Matrix {
-// 	m := make(matrix.Matrix, 2)
-// 	m[0] = []complex128{1, 0}
-// 	m[1] = []complex128{0, 1i}
-// 	return matrix.TensorProductN(m, bit...)
-// }
+func S(bit ...int) matrix.Matrix {
+	m := make(matrix.Matrix, 2)
+	m[0] = []complex128{1, 0}
+	m[1] = []complex128{0, 1i}
+	return matrix.TensorProductN(m, bit...)
+}
 
 // func T(bit ...int) matrix.Matrix {
 // 	m := make(matrix.Matrix, 2)
