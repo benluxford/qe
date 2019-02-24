@@ -45,12 +45,12 @@ func I(bit ...int) matrix.Matrix {
 	return matrix.TensorProductN(m, bit...)
 }
 
-// func X(bit ...int) matrix.Matrix {
-// 	m := make(matrix.Matrix, 2)
-// 	m[0] = []complex128{0, 1}
-// 	m[1] = []complex128{1, 0}
-// 	return matrix.TensorProductN(m, bit...)
-// }
+func X(bit ...int) matrix.Matrix {
+	m := make(matrix.Matrix, 2)
+	m[0] = []complex128{0, 1}
+	m[1] = []complex128{1, 0}
+	return matrix.TensorProductN(m, bit...)
+}
 
 // func Y(bit ...int) matrix.Matrix {
 // 	m := make(matrix.Matrix, 2)
