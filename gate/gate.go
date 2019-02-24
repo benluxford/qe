@@ -171,9 +171,9 @@ func Toffoli() matrix.Matrix {
 	return ControlledNot(3, []int{0, 1}, 2)
 }
 
-// func CNOT(bit, c, t int) matrix.Matrix {
-// 	return ControlledNot(bit, []int{c}, t)
-// }
+func CNOT(bit, c, t int) matrix.Matrix {
+	return ControlledNot(bit, []int{c}, t)
+}
 
 // func ControlledZ(bit int, c []int, t int) matrix.Matrix {
 // 	m := I([]int{bit}...)
