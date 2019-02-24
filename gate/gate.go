@@ -120,44 +120,44 @@ func ControlledR(bit int, c []int, t, k int) matrix.Matrix {
 	return m
 }
 
-// func CR(bit, c, t, k int) matrix.Matrix {
-// 	return ControlledR(bit, []int{c}, t, k)
-// }
+func CR(bit, c, t, k int) matrix.Matrix {
+	return ControlledR(bit, []int{c}, t, k)
+}
 
-// func ControlledNot(bit int, c []int, t int) matrix.Matrix {
-// 	m := I([]int{bit}...)
-// 	dim := len(m)
+func ControlledNot(bit int, c []int, t int) matrix.Matrix {
+	m := I([]int{bit}...)
+	dim := len(m)
 
-// 	index := []int64{}
-// 	f := "%0" + strconv.Itoa(bit) + "s"
-// 	for i := 0; i < dim; i++ {
-// 		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
-// 		bits := []rune(s)
+	index := []int64{}
+	f := "%0" + strconv.Itoa(bit) + "s"
+	for i := 0; i < dim; i++ {
+		s := fmt.Sprintf(f, strconv.FormatInt(int64(i), 2))
+		bits := []rune(s)
 
-// 		// Apply X
-// 		apply := true
-// 		for i := range c {
-// 			if bits[c[i]] == '0' {
-// 				apply = false
-// 				break
-// 			}
-// 		}
+		// Apply X
+		apply := true
+		for i := range c {
+			if bits[c[i]] == '0' {
+				apply = false
+				break
+			}
+		}
 
-// 		if apply {
-// 			if bits[t] == '0' {
-// 				bits[t] = '1'
-// 			} else {
-// 				bits[t] = '0'
-// 			}
-// 		}
+		if apply {
+			if bits[t] == '0' {
+				bits[t] = '1'
+			} else {
+				bits[t] = '0'
+			}
+		}
 
-// 		v, err := strconv.ParseInt(string(bits), 2, 0)
-// 		if err != nil {
-// 			panic(err)
-// 		}
+		v, err := strconv.ParseInt(string(bits), 2, 0)
+		if err != nil {
+			panic(err)
+		}
 
-// 		index = append(index, v)
-// 	}
+		index = append(index, v)
+	}
 
 // 	cnot := make(matrix.Matrix, dim)
 // 	for i, ii := range index {
