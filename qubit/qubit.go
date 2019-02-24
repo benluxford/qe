@@ -93,9 +93,7 @@ func New(input ...complex128) (qubit *Qubit) {
 // }
 
 // Normalise : Returns the current pointer to Qubit with normalised vector
-func (q *Qubit) Normalise() (qubit *Qubit) {
-	// set qubit to be the same address as q
-	qubit = q
+func (q *Qubit) Normalise() *Qubit {
 	//. the sum of all vector components
 	var sum float64
 	// add the base to the exponent power to sum
@@ -104,7 +102,7 @@ func (q *Qubit) Normalise() (qubit *Qubit) {
 	}
 	z := 1 / math.Sqrt(sum)
 	q.v = q.v.Multiply(complex(z, 0))
-	return
+	return q
 }
 
 // func (q *Qubit) Amplitude() []complex128 {
