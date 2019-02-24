@@ -1,6 +1,7 @@
 package gate
 
 import (
+	"math"
 	"math/cmplx"
 
 	"github.com/benluxford/qe/matrix"
@@ -26,16 +27,16 @@ func U(alpha, beta, gamma, delta float64) matrix.Matrix {
 	return u.Multiply(cmplx.Exp(complex(0, alpha)))
 }
 
-// func R(k int) matrix.Matrix {
-// 	m := make(matrix.Matrix, 2)
+func R(k int) matrix.Matrix {
+	m := make(matrix.Matrix, 2)
 
-// 	p := 2 * math.Pi / math.Pow(2, float64(k))
-// 	e := cmplx.Exp(complex(0, p))
+	p := 2 * math.Pi / math.Pow(2, float64(k))
+	e := cmplx.Exp(complex(0, p))
 
-// 	m[0] = []complex128{1, 0}
-// 	m[1] = []complex128{0, e}
-// 	return m
-// }
+	m[0] = []complex128{1, 0}
+	m[1] = []complex128{0, e}
+	return m
+}
 
 // func I(bit ...int) matrix.Matrix {
 // 	m := make(matrix.Matrix, 2)
