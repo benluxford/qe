@@ -64,20 +64,11 @@ func (v Vector) Add(input Vector) (total Vector) {
 	return
 }
 
-// Multi : Returns the product of two vectors of the same length
-// TODO - this needs to be modified to allow many vectors for multiplication
-// and to resize to the largest vector......
-func (v Vector) Multi(input Vector) (total Vector) {
-	// get the vector length
-	vectorLength := len(v)
-	// create a vector of the same length
-	total = make(Vector, vectorLength)
-	// loop over all values
-	for i := 0; i < vectorLength; i++ {
-		// combine the two vector values
-		total[i] = v[i] * input[i]
+// Multiply : Returns product of the input applied to all components in vector
+func (v Vector) Multiply(input complex128) (total Vector) {
+	for _, component := range v {
+		total = append(total, component*input)
 	}
-	// return sum vectors
 	return
 }
 
