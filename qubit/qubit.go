@@ -4,6 +4,7 @@ import (
 	"math"
 	"math/cmplx"
 
+	"github.com/benluxford/qe/matrix"
 	v "github.com/benluxford/qe/vector"
 )
 
@@ -100,10 +101,11 @@ func (q *Qubit) TensorProduct(input *Qubit) *Qubit {
 	return q
 }
 
-// func (q *Qubit) Apply(m matrix.Matrix) *Qubit {
-// 	q.v = q.v.Apply(m)
-// 	return q
-// }
+// Apply : Returns the current Qubit with Matrix applied
+func (q *Qubit) Apply(m matrix.Matrix) *Qubit {
+	q.v = q.v.Apply(m)
+	return q
+}
 
 // Normalise : Returns the current pointer to Qubit with normalised vector
 func (q *Qubit) Normalise() *Qubit {
