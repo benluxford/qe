@@ -61,17 +61,18 @@ func (q *Qubit) Clone() *Qubit {
 	return &Qubit{q.v.Clone()}
 }
 
-// func (q *Qubit) Fidelity(q0 *Qubit) float64 {
-// 	p0 := q0.Probability()
-// 	p1 := q.Probability()
-
-// 	var sum float64
-// 	for i := 0; i < len(p0); i++ {
-// 		sum = sum + math.Sqrt(float64(p0[i])*float64(p1[i]))
-// 	}
-
-// 	return sum
-// }
+// Fidelity : Returns the product of two Qubits probabilities
+func (q *Qubit) Fidelity(input *Qubit) (sum float64) {
+	// get the probability of the input Qubit
+	inputProbability := input.Probability()
+	// get the probability of the current qubit
+	qProbability := q.Probability()
+	// for each value in the input probability
+	for i := 0; i < len(inputProbability); i++ {
+		sum += math.Sqrt(float64(inputProbability[i]) * float64(qProbability[i]))
+	}
+	return
+}
 
 // func (q *Qubit) TraceDistance(q0 *Qubit) float64 {
 // 	p0 := q0.Probability()
