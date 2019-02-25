@@ -102,8 +102,8 @@ func (q *Qubit) TensorProduct(input *Qubit) *Qubit {
 }
 
 // Apply : Returns the current Qubit with Matrix applied
-func (q *Qubit) Apply(m matrix.Matrix) *Qubit {
-	q.v = q.v.Apply(m)
+func (q *Qubit) Apply(input matrix.Matrix) *Qubit {
+	q.v = q.v.Apply(input)
 	return q
 }
 
@@ -120,13 +120,13 @@ func (q *Qubit) Normalise() *Qubit {
 	return q
 }
 
-// func (q *Qubit) Amplitude() []complex128 {
-// 	a := []complex128{}
-// 	for _, amp := range q.v {
-// 		a = append(a, amp)
-// 	}
-// 	return a
-// }
+// Amplitude : Returns the Qubits vector (but why?)
+func (q *Qubit) Amplitude() (a []complex128) {
+	for _, amp := range q.v {
+		a = append(a, amp)
+	}
+	return
+}
 
 // Probability : Returns the exponent of each component in the vector as probability
 func (q *Qubit) Probability() (probabilityList []float64) {
