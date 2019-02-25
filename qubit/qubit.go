@@ -74,17 +74,20 @@ func (q *Qubit) Fidelity(input *Qubit) (sum float64) {
 	return
 }
 
-// func (q *Qubit) TraceDistance(q0 *Qubit) float64 {
-// 	p0 := q0.Probability()
-// 	p1 := q.Probability()
-
-// 	var sum float64
-// 	for i := 0; i < len(p0); i++ {
-// 		sum = sum + math.Abs(float64(p0[i]-p1[i]))
-// 	}
-
-// 	return sum / 2
-// }
+// TraceDistance : Returns the sum of the distance between probability in current and input Qubit's vectors
+func (q *Qubit) TraceDistance(input *Qubit) (sum float64) {
+	// get the probability of the input Qubit
+	inputProbability := input.Probability()
+	// get the probability of the current qubit
+	qProbability := q.Probability()
+	// for each value in the input probability
+	for i := 0; i < len(inputProbability); i++ {
+		sum += math.Abs(float64(inputProbability[i] - qProbability[i]))
+	}
+	// divide sum by two to get accurate average distance
+	sum = sum / 2
+	return
+}
 
 // Equals : Returns true if the given vectors equal each other
 func (q *Qubit) Equals(input *Qubit, eps ...float64) bool {
