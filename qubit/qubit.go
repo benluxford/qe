@@ -256,10 +256,14 @@ func (q *Qubit) Probability() (probabilityList []float64) {
 // 	return Zero()
 // }
 
-// func TensorProduct(q ...*Qubit) *Qubit {
-// 	q1 := q[0]
-// 	for i := 1; i < len(q); i++ {
-// 		q1 = q1.TensorProduct(q[i])
-// 	}
-// 	return q1
-// }
+// TensorProduct : Returns the tensor product of the given Qubits
+func TensorProduct(input ...*Qubit) (productQubit *Qubit) {
+	// save the first Qubit as the product
+	productQubit = &Qubit{input[0].v}
+	// for eac Qubit passed
+	for i := 1; i < len(input); i++ {
+		// calculate the tensor product of the Qubit
+		productQubit = productQubit.TensorProduct(input[i])
+	}
+	return
+}
