@@ -162,29 +162,27 @@ func (q *Qubit) Probability() (probabilityList []float64) {
 // 	return q
 // }
 
-// func (q *Qubit) ProbabilityZeroAt(bit int) ([]int, []float64) {
-// 	p := []float64{}
-// 	index := []int{}
+// ProbabilityZeroAt : Returns the probability of zero at indices
+func (q *Qubit) ProbabilityZeroAt(bit int) (index []int, probability []float64) {
+	dim := q.v.Dimension()
+	den := int(math.Pow(2, float64(bit+1)))
+	div := dim / den
 
-// 	dim := q.v.Dimension()
-// 	den := int(math.Pow(2, float64(bit+1)))
-// 	div := dim / den
+	for i := 0; i < dim; i++ {
+		probability = append(probability, q.Probability()[i])
+		index = append(index, i)
 
-// 	for i := 0; i < dim; i++ {
-// 		p = append(p, q.Probability()[i])
-// 		index = append(index, i)
+		if len(probability) == dim/2 {
+			break
+		}
 
-// 		if len(p) == dim/2 {
-// 			break
-// 		}
+		if (i+1)%div == 0 {
+			i = i + div
+		}
+	}
 
-// 		if (i+1)%div == 0 {
-// 			i = i + div
-// 		}
-// 	}
-
-// 	return index, p
-// }
+	return
+}
 
 // func (q *Qubit) ProbabilityOneAt(bit int) ([]int, []float64) {
 // 	p := []float64{}
