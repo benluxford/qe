@@ -94,10 +94,11 @@ func (q *Qubit) Equals(input *Qubit, eps ...float64) bool {
 	return q.v.Equals(input.v, eps...)
 }
 
-// func (q *Qubit) TensorProduct(q0 *Qubit) *Qubit {
-// 	q.v = q.v.TensorProduct(q0.v)
-// 	return q
-// }
+// TensorProduct : Returns the current Qubit with the tensor product of the input Qubit applied
+func (q *Qubit) TensorProduct(input *Qubit) *Qubit {
+	q.v = q.v.TensorProduct(input.v)
+	return q
+}
 
 // func (q *Qubit) Apply(m matrix.Matrix) *Qubit {
 // 	q.v = q.v.Apply(m)
