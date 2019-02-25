@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/benluxford/qe/matrix"
+	"github.com/benluxford/qe/qubit"
 )
 
 func main() {
@@ -11,9 +11,13 @@ func main() {
 	// fmt.Println(v)
 	// c := vector.TensorProduct(v, v)
 	// fmt.Println(c)
-	m := matrix.Matrix{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}}
-	fmt.Println(m)
-	// fmt.Println(m.Transpose())
-	fmt.Println(matrix.TensorProduct(m, m, m))
+	// m := matrix.Matrix{{1, 2, 3}, {1, 2, 3}, {1, 2, 3}}
+	// fmt.Println(m)
+	// // fmt.Println(m.Transpose())
+	// fmt.Println(matrix.TensorProduct(m, m, m))
 	// fmt.Println(matrix.Eps(22.5, 15.2))
+	q := qubit.New(0, 1)
+	fmt.Println(q)
+	d := q.Clone()
+	fmt.Println(d)
 }
