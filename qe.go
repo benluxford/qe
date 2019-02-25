@@ -16,7 +16,8 @@ func main() {
 	// // fmt.Println(m.Transpose())
 	// fmt.Println(matrix.TensorProduct(m, m, m))
 	// fmt.Println(matrix.Eps(22.5, 15.2))
-	q := qubit.New(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+	q := qubit.New(0, 1)
 	fmt.Println(q)
-	fmt.Println(q.NumberOfBit())
+	d := q.Clone()
+	fmt.Println(d)
 }
