@@ -57,6 +57,7 @@ func (q *Qubit) IsOne(eps ...float64) bool {
 
 // Clone : Returns a clone of the current Qubit
 func (q *Qubit) Clone() *Qubit {
+	// create new Qubit and clone the vector of the current
 	return &Qubit{q.v.Clone()}
 }
 
@@ -120,14 +121,17 @@ func (q *Qubit) Normalise() *Qubit {
 // 	return a
 // }
 
-// func (q *Qubit) Probability() []float64 {
-// 	list := []float64{}
-// 	for _, amp := range q.v {
-// 		p := math.Pow(cmplx.Abs(amp), 2)
-// 		list = append(list, p)
-// 	}
-// 	return list
-// }
+// Probability : Returns the exponent of each component in the vector as probability
+func (q *Qubit) Probability() (probabilityList []float64) {
+	// for each component in Qubit's vector
+	for _, component := range q.v {
+		// calculate the probability
+		probability := math.Pow(cmplx.Abs(component), 2)
+		// append the probability to the list
+		probabilityList = append(probabilityList, probability)
+	}
+	return
+}
 
 // func (q *Qubit) Measure(bit ...int) *Qubit {
 // 	if len(bit) > 0 {
