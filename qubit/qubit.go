@@ -180,36 +180,40 @@ func (q *Qubit) ProbabilityZeroAt(bit int) (index []int, probability []float64) 
 			i = i + div
 		}
 	}
-
 	return
 }
 
-// func (q *Qubit) ProbabilityOneAt(bit int) ([]int, []float64) {
-// 	p := []float64{}
-// 	index := []int{}
-
-// 	zi, _ := q.ProbabilityZeroAt(bit)
-// 	one := []int{}
-// 	for i := range q.v {
-// 		found := false
-// 		for _, zii := range zi {
-// 			if i == zii {
-// 				found = true
-// 				break
-// 			}
-// 		}
-// 		if !found {
-// 			one = append(one, i)
-// 		}
-// 	}
-
-// 	for _, i := range one {
-// 		p = append(p, q.Probability()[i])
-// 		index = append(index, i)
-// 	}
-
-// 	return index, p
-// }
+// ProbabilityOneAt : Returns the probability of one at indices
+func (q *Qubit) ProbabilityOneAt(bit int) (index []int, probability []float64) {
+	// get all the indices with probability of 0
+	zeroIndices, _ := q.ProbabilityZeroAt(bit)
+	// create slice to hold all probability of one indices
+	one := []int{}
+	// for each value in the Qubit's vector
+	for i := range q.v {
+		found := false
+		// loop over all zero indices
+		for _, zeroIndex := range zeroIndices {
+			// if the index matches a zero index, found and break loop
+			if i == zeroIndex {
+				found = true
+				break
+			}
+		}
+		// if the index was not found in the zero index append to the one slice
+		if !found {
+			one = append(one, i)
+		}
+	}
+	// for each value in the one slice
+	for _, i := range one {
+		// get and append the probability of the vector component
+		probability = append(probability, q.Probability()[i])
+		// append the index of the given probability
+		index = append(index, i)
+	}
+	return
+}
 
 // func (q *Qubit) MeasureAt(bit int) *Qubit {
 // 	index, p := q.ProbabilityZeroAt(bit)
