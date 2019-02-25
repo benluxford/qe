@@ -142,27 +142,33 @@ func (q *Qubit) Probability() (probabilityList []float64) {
 	return
 }
 
-// func (q *Qubit) Measure(bit ...int) *Qubit {
-// 	if len(bit) > 0 {
-// 		return q.MeasureAt(bit[0])
-// 	}
-
-// 	rand.Seed(time.Now().UnixNano())
-// 	r := rand.Float64()
-
-// 	plist := q.Probability()
-// 	var sum float64
-// 	for i, p := range plist {
-// 		if sum <= r && r < sum+p {
-// 			q.v = v.NewZero(len(q.v))
-// 			q.v[i] = 1
-// 			break
-// 		}
-// 		sum = sum + p
-// 	}
-
-// 	return q
-// }
+// Measure : Returns the current Qubit
+func (q *Qubit) Measure(bit ...int) *Qubit {
+	// if more than one bit is given, use the first
+	if len(bit) > 0 {
+		return q.MeasureAt(bit[0])
+	}
+	// create a random float - will be the Qubit initial value (kinda)
+	rand.Seed(time.Now().UnixNano())
+	randomValue := rand.Float64()
+	// get the probability list
+	probabilityList := q.Probability()
+	var probabilitySum float64
+	// for the probabilities in the list
+	for i, probability := range probabilityList {
+		// if the overall probability is less than the random value or the probability + the sum
+		if probabilitySum <= randomValue && randomValue < probabilitySum+probability {
+			// set the current vector component to 1
+			q.v = v.NewZero(len(q.v))
+			q.v[i] = 1
+			break
+		}
+		//increase the probability sum
+		probabilitySum += probability
+	}
+	// return the modified Qubit
+	return q
+}
 
 // ProbabilityZeroAt : Returns the probability of zero at indices
 func (q *Qubit) ProbabilityZeroAt(bit int) (index []int, probability []float64) {
