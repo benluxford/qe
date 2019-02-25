@@ -3,6 +3,8 @@ package qubit
 import (
 	"math"
 	"math/cmplx"
+	"math/rand"
+	"time"
 
 	"github.com/benluxford/qe/matrix"
 	v "github.com/benluxford/qe/vector"
@@ -215,48 +217,56 @@ func (q *Qubit) ProbabilityOneAt(bit int) (index []int, probability []float64) {
 	return
 }
 
-// func (q *Qubit) MeasureAt(bit int) *Qubit {
-// 	index, p := q.ProbabilityZeroAt(bit)
-
-// 	rand.Seed(time.Now().UnixNano())
-// 	r := rand.Float64()
-
-// 	var sum float64
-// 	for _, pp := range p {
-// 		sum = sum + pp
-// 	}
-
-// 	if r > sum {
-// 		for _, i := range index {
-// 			q.v[i] = complex(0, 0)
-// 		}
-
-// 		q.Normalize()
-// 		return One()
-// 	}
-
-// 	one := []int{}
-// 	for i := range q.v {
-// 		found := false
-// 		for _, ix := range index {
-// 			if i == ix {
-// 				found = true
-// 				break
-// 			}
-// 		}
-
-// 		if !found {
-// 			one = append(one, i)
-// 		}
-// 	}
-
-// 	for _, i := range one {
-// 		q.v[i] = complex(0, 0)
-// 	}
-
-// 	q.Normalize()
-// 	return Zero()
-// }
+// MeasureAt : Returns a new Qubit pointer at either zero or one measured at the given input
+func (q *Qubit) MeasureAt(bit int) *Qubit {
+	// get the probability of zero at indices
+	zeroIndices, probability := q.ProbabilityZeroAt(bit)
+	// create a random float - will be the Qubit initial value (kinda)
+	rand.Seed(time.Now().UnixNano())
+	randomValue := rand.Float64()
+	// calculate the sum of the probability of zero
+	var probabilitySum float64
+	for _, probabilityValue := range probability {
+		probabilitySum += probabilityValue
+	}
+	// if the random number is larger than the probability sum
+	if randomValue > probabilitySum {
+		// Set all the vector values to 0
+		for _, i := range zeroIndices {
+			q.v[i] = complex(0, 0)
+		}
+		// normalise the Qubit
+		q.Normalise()
+		// return a Qubit in the one state
+		return One()
+	}
+	// create slice to hold all probability of one indices
+	one := []int{}
+	// for each value in the Qubit's vector
+	for i := range q.v {
+		found := false
+		// loop over all zero indices
+		for _, zeroIndex := range zeroIndices {
+			// if the index matches a zero index, found and break loop
+			if i == zeroIndex {
+				found = true
+				break
+			}
+		}
+		// if the index was not found in the zero index append to the one slice
+		if !found {
+			one = append(one, i)
+		}
+	}
+	// Set all the vector values to 0
+	for _, i := range one {
+		q.v[i] = complex(0, 0)
+	}
+	// normalise the Qubit
+	q.Normalise()
+	// return a Qubit in the zero state
+	return Zero()
+}
 
 // TensorProduct : Returns the tensor product of the given Qubits
 func TensorProduct(input ...*Qubit) (productQubit *Qubit) {
